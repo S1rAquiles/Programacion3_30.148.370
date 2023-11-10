@@ -8,16 +8,16 @@ body{
 	flex-direction:column;
 	justify-content: center;
 	align-items:center;
-	background:rgb(0,0,0,.7);
+	background:rgba(159, 158, 158, 0.7);
 	width:50%;
 	height:40vh;
 	margin:50px auto;
-	border-radius:10px 10px 10px 10px;
+	border-radius:20%;
 }
 label{
 	font-weight: bold;
 	font-size: 30px;
-	color:white;
+	color:rgba(233, 36, 36, 0.537);
 }
 h1{
 	text-align:center;
@@ -32,6 +32,8 @@ form{
 input{
 padding:8px;
 border-radius:10px 10px 10px 10px;
+border-color: aqua;
+color: rgb(0, 0, 0)
 }
 #iniciar{
 	margin-top:10px;
