@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/x-icon" href="img/limpieza.png" />
   <title>Productos</title>
   <link rel="stylesheet" type="text/css" href="/css/producto.css">
   
@@ -31,16 +31,19 @@
               <td><%=producto.calidad%></td>
               <td><%=producto.cantidad%></td>
               <td class="icon">
-              <a href="/update/<%= producto.producto_id%>"><img src="/img/update.png" width="30"></a>
-              <a href="/delete/<%= producto.producto_id%>"><img src="/img/delete.png" width="30" id="delete"></a>
-              <a href="/addImagen">Imagen</a>
+                <a href="/update/<%= producto.producto_id%>"><img src="/img/update.png" width="30"></a>
+                <a href="/delete/<%= producto.producto_id%>"><img src="/img/delete.png" width="30" id="delete"></a>
+                <a href="/addImagen/<%= producto.producto_id%>"><img src="/img/img.png" width="30"></a>
              </td>
             </tr>
            <%}%>
         </table>
        
   </div>
-  <a id='botonProductos' href="/">Volver</a>
+  <div class="simon">
+      <a id='botonProductos' href="/">Volver</a>
   <a href='/categorias' id='botonProductos'>Categorias</a>
+  </div>
+
 </body>
 </html>
