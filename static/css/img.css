@@ -3,7 +3,29 @@
         background-size:cover;
         background-attachment: fixed;
     }
-    
+    h1{
+      color:rgb(39, 38, 38);
+			border-radius: 20%;
+			border-color: brown;
+			text-align:center;
+			margin-top:50px;
+			background-color: rgb(203, 251, 251);
+    }
+    .carlitos{
+      font-family: 'roboto';
+      background: #4568dc;
+      background: -webkit-linear-gradient(to right, #7769aa, #f1a0a0);
+      background: linear-gradient(to right,#e6e1fb, #c9f3b4);
+      border:none;
+      width: line;
+      margin:20px 10px;
+      color: #191818;
+      height: 40px;
+      font-size: 25px;
+      cursor: pointer;
+      border-radius:10px 10px 10px 10px;
+      text-align:center;
+    }
     form{
 		
         display:flex;
