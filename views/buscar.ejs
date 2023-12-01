@@ -75,8 +75,8 @@
           <div style='display:flex;flex-direction: column;margin-left:25px;'>
         <p style='font-size: 20px;'><span style='font-weight:bold;font-size:25px;'>Nombre:</span> <%= result.nombre %></p> 
           <p style='font-size: 20px;'><span style='font-weight:bold;font-size:20px;'>Codigo:</span> <%= result.codigo %></p>
-          <p style='font-size: 20px;'><span style='font-weight:bold;font-size:20px;'>Precio:</span> <span style='color:green'><%= result.precio %> $</span></p>
-          <!--Randy estuvo aqui-->
+          <p style='font-size: 20px;'><span style='font-weight:bold;font-size:20px;'>Precio:</span> <span style='color:rgb(128, 0, 0)'><%= result.precio %> $</span></p>
+
           <p style='font-size: 20px;'><span style='font-weight:bold;font-size:20px;'>Descripcion:</span> <%= result.descripcion %></p>
           <p style='font-size: 20px;'><span style='font-weight:bold;font-size:20px;'>Calidad:</span> <%= result.calidad %></p>
           <p style='font-size: 20px;'><span style='font-weight:bold;font-size:20px;'>Cantidad:</span> <%= result.cantidad %></p>  
@@ -150,12 +150,12 @@
          div.append(div2);
          fragmento.append(div);
          galeriaImagenesBusqueda.append(fragmento);
-      // Muestra los resultados en la página  
+ 
 
         }else{
 
              
-        // No se encontraron resultados, muestra un mensaje
+
         let mensaje = document.createElement('P');
         mensaje.style='color:red;margin-top:60px;font:30px "fuenteC"';
         mensaje.innerHTML = 'No se encontraron resultados';
