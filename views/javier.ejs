@@ -27,9 +27,7 @@
             </div>
         </nav>
         <section style='width:100%;'>
-            <div class="container">
-            </div>
-        </section>
+
         
         
         
@@ -63,26 +61,16 @@
                                      <img src="/img/carrito.png" class='imgCarrito'>
                                      <a href="/detalles/<%=producto[x].producto_id%>" style='margin-top:7px;margin-left:8px;'><img src="/img/img.png" width="30"></a> 
         
-                                     </div>
-                                    
-        
-                                 
-
+                                     </div>                                 
                                    </div>
-
-
-
-                                </div>
-
-                                
-        
+                                </div>       
                             </div>
                             <% } %>
                         <!-------------------->
                                <table border class='table'>
 
                         <thead>
-                            <tr style='border:1px solid black'>
+                            <tr style='border:1px solid rgb(245, 40, 40); background: -webkit-linear-gradient(to right, #6842ef, rgb(127, 219, 52));background: linear-gradient(to right, #6842ef, rgb(52, 130, 219))'>
                                 
                                 <th class='column'>Imagen</th>
                                 <th class='column'>Nombre</th>
@@ -98,9 +86,9 @@
 
                         <tbody>
                         <%for(let u = 0;u < producto.length;u++){%>
-                         <tr class='tr' style='border:1px solid black'><!--ul-->
-                            <!--li-->
-                            <td class='column'><img src="<%= producto[u].imagen_url %>" style='width:100%;height:17vh'></td>
+                         <tr class='tr' style='border:1px solid black;background: -webkit-linear-gradient(to right, #6842ef, rgb(40, 79, 8));background: linear-gradient(to right, #6842ef, rgb(52, 200, 219))'>
+                            
+                            <td class='column'><img src="<%= producto[u].imagen_url %>" style='width:100%;height:17vh;border: solid 2px black'></td>
                              <td class='column'><%= producto[u].nombre %></td>
                              <td class='column'><%= producto[u].codigo %></td>
                              <td class='column'><%= producto[u].precio %></td>
@@ -117,7 +105,7 @@
                          </table>
                            <%for(let l = 0 ; l < producto.length; l++){%>
                         <ul class='ULtabla3'>
-                            <li class='LItabla3'><img src="<%= producto[l].imagen_url %>" style='width:40%;'></li>
+                            <li class='LItabla3'><img src="<%= producto[l].imagen_url %>" style='width:40%; border: solid 3px black'></li>
                             <li class='LItabla3'><span>Nombre: </span><span><%= producto[l].nombre %></span></li>
                             <li class='LItabla3'><span>Codigo: </span><span><%= producto[l].codigo %></span> </li>
                             <li class='LItabla3'><span>Precio: </span><span style='color:red'><%= producto[l].precio %> $</span> </li>

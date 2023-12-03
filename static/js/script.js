@@ -24,7 +24,7 @@ ulTabla3[k].classList.toggle('claseTabla3-JS');
   let galeriaImagenesBusqueda = document.getElementById('galeriaImagenes');
   console.log(valorBusqueda, 'dato del query');
   // Realiza la solicitud al servidor
-  fetch("/cliente", {
+  fetch("/javier", {
     method: "POST",
     headers: { 'Content-type': 'application/json' },
     body: JSON.stringify({

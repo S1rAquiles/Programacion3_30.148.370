@@ -14,10 +14,17 @@ padding: 0;
 .table{
 margin:50px auto;
 width:80%;
-background:rgba(235, 177, 42, 0.7);
+background: -webkit-linear-gradient(to right, #aee6eb, rgb(197, 233, 243));
+background: linear-gradient(to right,rgb(212, 253, 249), #b8d4d4);
+border: 2px solid black;
+
 }
+.table:hover {
+
+	box-shadow: rgb(47, 0, 255) 10px 14px 15px;
+  }
 table{
- color:white;
+ color:rgb(9, 9, 9);
  width:100%;
  
 }

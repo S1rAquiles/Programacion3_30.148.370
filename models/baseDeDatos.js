@@ -271,7 +271,7 @@ db.all(sql,[busqueda,busqueda,busqueda,busqueda,busqueda],(err,rows)=>{
     } 
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
       // Envío de la respuesta con los resultados
-      res.render('clientes.ejs',{
+      res.render('javier.ejs',{
         producto:rowsProduct
       });
       

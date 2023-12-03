@@ -133,12 +133,12 @@ app.get('/eliminarCategoria/:id',(req,res)=>{
 baseDatos.deleteCategoriaGET(req,res);
 })
 //-------------------------------------------------------
-app.get('/clientes',(req,res)=>{
+app.get('/javier',(req,res)=>{
   console.log('mostrando pagina la cliente!');
 baseDatos.ClientesGET(req,res);
 })
 //-------------------------------------------------------
-app.post('/cliente', (req, res) => {
+app.post('/javier', (req, res) => {
  baseDatos.filtrar(req,res);
 });
 //-------------------------------------------------------

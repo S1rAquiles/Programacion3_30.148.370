@@ -12,10 +12,6 @@
         color: black;
         height: 100vh;
     }
-  @font-face{
-            font-family:'gamer';
-            src:url(/fuentes/Gato.ttf);
-           }
 .carlos{
     font-family: 'roboto';
     background: #4568dc;
@@ -50,13 +46,7 @@
             background: rgba(0, 0, 0, 0.6);
             box-shadow: rgb(25, 0, 255) 5px 14px 25px;
           }
-        .imgContent{
-            display:flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
 
-        }
         .productooo{
            display:flex;
            flex-direction: column;
@@ -67,15 +57,7 @@
            margin-top:80px;
            margin-left:20px;
         }
-        .etiquetaP{
-            font-size:1rem;
-            font-weight: bold;
-        }
-        #searchInputt{
-            width:75%;
-            height:6vh;
-            text-align: center;
-        }
+
         #buscarPrincipal{
             width:75%;
             height:6vh;
@@ -139,37 +121,13 @@
          align-items: center;
          width: 100%;
         }
-         .imagenesVertical{
-            display:flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            width:40%;
-            height:100vh;
-            color:black;
-            font:3rem 'gamer';
-        }
-        
-         #texto{
-         color:white;
-         margin-top:1rem;
-         padding:1rem;
-         margin-bottom:1rem;
-         background:rgba(0,0,0,.9);
-         width:100%;
-         }
-         #texto p{
-         margin:1.5rem;
-         font:1.5rem 'arial';
-         }
          h2{
-            font:50px 'fuenteC';
-            text-align: center;
-            background: -webkit-linear-gradient(to right, #6cdfe9, #36b9dd);
-            background: linear-gradient(to right,#a7f369, #0b57d9);
-            border-radius: 40%;
-            align-items: center;
+        font:50px 'fuenteC';
+        text-align: center;
+        background: -webkit-linear-gradient(to right, #6cdfe9, #36b9dd);
+        background: linear-gradient(to right,#a7f369, #0b57d9);
+        border-radius: 40%;
+        align-items: center;
          }
          .claseIMG{
             width:20%;
@@ -186,37 +144,6 @@
           transform:translateY(-5px);
           box-shadow:15px 15px 100px black;
          }
-         .prueba{
-            color:red;
-            text-decoration: none;
-         }
-        #na{
-            display:flex;
-            align-items: center;
-            justify-content:flex-end;
-            width:40%;
-            margin-left:1rem;
-        }
-
-        #na ul{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height:7vh;
-            margin-top:1rem;
-            margin-right:1rem;
-        }
-         #na ul a{
-         text-decoration:none;
-         color:white;
-         margin:1rem;
-         font:1.5rem 'fuenteC';
-         transition:all 1s;
-        }
-        #na ul a:hover{
-         text-decoration-line: underline;
-        }
-
         nav{
             display:flex;
             justify-content:flex-start;
@@ -236,27 +163,12 @@
             color:white;
            font:3rem 'fuenteC';
         }
-        /*#na ul li{
-          ???????????
-        }*/
-
          #imggg{
             display:none;
         }
-
         #na2{
             display:none;
-        }
-
-        #styleDiv1{
-            width:100%;
-            padding:10px;
-        }
-         #NPB{ 
-            display:flex;
-            justify-content:center;
-            align-items:center
-         }
+        }      
          #comprarDetalles{
             display:flex;
            
@@ -271,28 +183,17 @@
             list-style: none;
          }
           
-          .cuadriculaLista{
-            background:red;
-            display:flex;
-            flex-direction:column;
-            width:100%;
-         }
 
          .table{
          display:none;
          width:90%;
          margin:50px auto;
-         width:80% ;
+
         background:rgba(53, 51, 46, 0.7);
         border: 3;
          }
 
-         .tableTR{
-         display:flex;
-         font-size:20px;
-         margin-top:50px;
          
-         }
          .cadaProducto{
          display:none;
          }
@@ -301,7 +202,6 @@
          }
          .column{
             text-align: center;
-            
             width:20%;
          }
  
@@ -325,8 +225,6 @@
             justify-content: center;
             align-items: center;
             width:100%;
-           
-
          }
          .section{
             width: 100%;
@@ -416,8 +314,7 @@
           text-decoration: none;
           color:black;
          }
-        /*----------------------*/
-        /*nav responsive*/
+
           .menu-horizontal{
             border:1px solid red violet;
         list-style:none;
@@ -428,35 +325,7 @@
             width:30%;
          }
 
-       .menu-horizontal li img{
-          display:block;
-          padding:15px 20px;
-          color: white;
-          text-decoration:none;
-       }
-       /*.menu-horizontal*/.li:hover{
-        background-color:grey;
-       }
-       .menu-vertical{
-        position: absolute;
-        display:none;
-        list-style: none;
-        width:20%;
-        background:rgb(0,0,0,0.7);
-        transform:translateX(-60px);
-       }
-       .menu-horizontal li:hover .menu-vertical{
-       display: block;
-       }
-
-       .menu-vertical li:hover{
-        background: black;
-       }
-       .menu-vertical li img{
-        display: block;
-        color:white;
-        text-decoration:none;
-       }
+       
        .flex{
        display: flex;
       }
@@ -473,7 +342,7 @@
             border-radius:10px;
             
         }
-       
+
         #styleDiv1{
             display:none;
 
@@ -483,7 +352,6 @@
             width:60%;
             border-radius:10px;
         }
-       
         .productooo{
            display:flex;
            flex-direction: column;
@@ -494,13 +362,6 @@
            margin:1rem;
            margin-top: 100px;
         }
-        #NPB{ 
-            display:flex;
-            flex-direction: column;
-            justify-content:center;
-            align-items:center
-         }
-
           #botonP{
           background:rgb(56, 247, 9);
           transition:all 1s;
@@ -555,8 +416,6 @@
          font-size:5px;
         
          }
-        
-         /*clases generadas con javaScript*/
          .claseTabla3-JS{
             display:flex;
             flex-direction:column;
@@ -567,6 +426,4 @@
             color:black; 
             border:2px dashed grey;
          }
-
-         
         }
