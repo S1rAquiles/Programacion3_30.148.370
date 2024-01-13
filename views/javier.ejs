@@ -11,6 +11,7 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
   
         <link rel="stylesheet" type="text/css" href="/css/clientes.css">
+        <script type="text/javascript" src="/js/alert.js"></script>
     </head>
     <body>
         <div class='clasePadre'>
@@ -28,7 +29,7 @@
         </nav>
         <section style='width:100%;'>
 
-        
+            <a class="perico" href="/">Volver</a>
         
         
                     <section class="section">
@@ -58,7 +59,7 @@
         
                                      <div id='comprarDetalles'>
         
-                                     <img src="/img/carrito.png" class='imgCarrito'>
+                                        <a href="/comprar/<%=producto[x].producto_id%>"  style='margin-top:7px;margin-left:8px;'><img src="/img/carrito.png"  width="30"></a>
                                      <a href="/detalles/<%=producto[x].producto_id%>" style='margin-top:7px;margin-left:8px;'><img src="/img/img.png" width="30"></a> 
         
                                      </div>                                 
@@ -96,7 +97,7 @@
                              <td class='column'><%= producto[u].calidad %></td>
                              <td class='column'><%= producto[u].cantidad %></td>
                             <td>
-                                <img src="/img/carrito.png" style='width:80%;'>
+                                <a href="/comprar/<%=producto[u].producto_id%>" style='margin-top:7px;margin-left:8px;'><img src="/img/carrito.png"  width="30"></a>
                                      <a href="/detalles/<%=producto[u].producto_id%>" style='margin-top:7px;margin-left:8px;'><img src="/img/img.png" width="30"></a>
                                  </td>
                          </tr> 
@@ -115,7 +116,7 @@
                             <li class='LItabla3'><span>Categoria: </span><span><%= producto[l]. categoria_id %></span></li>
                             <li class='LItabla3'>
                                 <div style='display:flex;justify-content:center;align-items:center;width:20%;'>
-                                    <img src="/img/carrito.png" style='width:100%;'>
+                                    <a href="/comprar/<%=producto[l].producto_id%>"><img src="/img/carrito.png" class='imgCarrito' width="30"></a>
                                 </div>
                                 <div style='display:flex;justify-content:center;align-items:center;width:20%;'>
                                      <a href="/detalles/<%=producto[l].producto_id%>" style='margin-top:7px;margin-left:8px;'><img src="/img/lista.png" style='width:100%;'></a>

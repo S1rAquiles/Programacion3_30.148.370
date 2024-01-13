@@ -40,8 +40,24 @@ color: rgb(0, 0, 0)
 	padding: 7px;
 	border-radius:10px 10px 10px 10px;
 }
+#casco{
+	cursor: pointer;
+	margin-top:20px;
+}
 
+#casco:hover{
+	box-shadow: rgb(47, 0, 255) 10px 14px 15px;
+}
+a{
+	background-color: rgb(238, 171, 2);
+	padding:6px;
+	border-radius:10px ;
+	text-align: center;
+}
+a:hover {
 
+	box-shadow: rgb(47, 0, 255) 10px 14px 15px;
+  }
 @media(max-width:600px){
 	body{
 		background-image: url(fondo3.png);

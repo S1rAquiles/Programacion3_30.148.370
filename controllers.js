@@ -1,17 +1,56 @@
+const cookieParser = require('cookie-parser');
+const path = require('path');
 require('dotenv').config();
+var handlebars = require('express-handlebars')
+const Recaptcha = require('express-recaptcha').RecaptchaV2;
+const recaptcha = new Recaptcha('6LcP7EkpAAAAADhHkaAuLH8jC4G3Mp04NgwBgacw', '6LcP7EkpAAAAAGBhwpe7GvkNtCQN9q3Wc5Ma7Nvx');
 const multer = require('multer');
 const http = require('http');
 const express = require('express');
 const app = express();
+
+//Configuracion socket.io para las notificaciones realTime
+
+const server = http.createServer(app);
+
+const {Server} = require('socket.io');
+
+const io = new Server(server);
+
+io.on('connection', (socket) => {
+
+console.log('Un usuario se a conectado');
+
+socket.emit('mensajeServer', '¡Hola, cliente!');
+
+socket.on('disconnect',()=>{
+
+console.log('un usuario se a desconectado');
+
+});
+
+});
+
+
+
+
+app.use(express.json());
+app.use(cookieParser());
+const jwt = require('jsonwebtoken');
 const bodyParser= require('body-parser');
 
-const path = require('path');
 const baseDatos = require('./models/baseDeDatos.js');
 const utils = require('./utils/uploadImg.js');
-const {ADMIN,PASSWORD} = process.env;
+const {verifyToken} = require('./utils/JWT.js');
+//middleware para verificar admin
+const {verifyToken2} = require('./utils/JWT2.js');
+//Variables de entorno
+const {contrasena,administrador,port,secretKey2} = process.env;
 let ext;
-app.use(express.json());
-let login= false;
+
+
+
+
 let storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, './static/uploads')
@@ -33,10 +72,9 @@ app.use(express.static(__dirname+'/static'));
 app.set('view engine','ejs');//definimos el motor de plantilla con archivos ejs
 app.set('views',path.join(__dirname,"./views"));//definimos la ruta del motor de plantilla
 app.use(express.urlencoded({extended:false}));//permite recuperar los valores publicados en un request
-port = app.listen(5000);
-console.log('Servidor corriendo en el puerto 5000 vamos fino, no explote creador');
-
-
+app.listen(port,()=>{
+  console.log(`Servidor corriendo exitosamente en el puerto ${port}`);
+});
 
 //-----------------------------------------------------------
 //enruptamiento
@@ -51,25 +89,31 @@ res.render('iniciarSesion.ejs');
 
 app.post('/login',(req,res)=>{
 
- const {admin,password} = req.body;
+  const {admin,password} = req.body;
+ 
+  const dato= {
+   admin,
+   password
+  }
+ 
+    if(admin === administrador && password === contrasena){
+     const token = jwt.sign(dato,secretKey2,{expiresIn:60 * 60 * 24});
+    // Guardar token en cookies
+     res.cookie('token2', token, { httpOnly: true, secure: true });
+     res.redirect('/productos');
+    }else{
+     login=false;
+    res.redirect('/*');
+    }
+ 
+ });
 
-   if(admin =="gato" && password =="gato"){
-    login=true;
-    res.redirect('/productos');
-   }else{
-    login=false;
-   res.redirect('/*');
-   }
-
-});
-  
-
-app.get('/add',(req,res)=>{
+app.get('/add',verifyToken2,(req,res)=>{
 res.render('add.ejs');
 });
 
 //---------------------------------------------------------
-app.get('/addImagen/:id',(req,res)=>{
+app.get('/addImagen/:id',verifyToken2,(req,res)=>{
 baseDatos.getImagen(req,res);
 });
 
@@ -84,12 +128,100 @@ baseDatos.aggDato(req,res);
 });
 
 
-app.get('/productos',(req,res)=>{
+app.get('/productos',verifyToken2,(req,res)=>{
   baseDatos.mostrarProductos(req,res);
 });
+
+
+
+
+//............................en trabajo.........................................
+
+
+app.get('/iniciarEmail',(req,res)=>{
+  res.render('iniciarEmail.ejs');
+});
+app.post('/iniciarEmail',(req,res)=>{
+  baseDatos.postLoginCliente(req,res);
+
+});
+
+
+app.get('/user',(req,res)=>{
+  res.render('user.ejs');
+});
+app.post('/user',recaptcha.middleware.verify,(req,res)=>{
+  
+if(!req.recaptcha.error){
+    // El reCAPTCHA se ha verificado correctamente
+    baseDatos.aggUser(req,res);
+  } else{
+    // El reCAPTCHA no se ha verificado correctamente
+    res.send('Debes validar el Recaptcha');
+  } 
+})
+app.get('/mensageDeRegistro',(req,res)=>{
+  const registro = req.cookies.registro;
+  if(typeof registro !== 'undefined'){
+    res.json({mensaje:registro});
+  }else{
+    res.json({mensaje:false});
+  }
+  })
+  //------------------------------------------------------
+  app.get('/eliminarMensajeRegistro',(req,res)=>{
+  
+  if(typeof req.cookies.registro !== 'undefined'){
+   res.clearCookie('registro'); 
+   res.json({mensaje:'Mensaje_Eliminadooo'});
+  }else{
+    res.json({mensaje:false});
+  }
+  
+  })
+app.get('/usuario',(req,res)=>{
+  baseDatos.mostrarUsuario(req,res);
+});
+
+app.get('/comprar/:id',verifyToken,(req,res)=>{
+  res.clearCookie('transaccion');
+  baseDatos.comprar(req,res);
+});
+//------------------------------------------------------
+app.post('/comprarPost',async (req,res)=>{
+baseDatos.comprarPOST(req,res);
+})
+//------------------------------------------------------
+app.get('/transaction',(req,res)=>{
+
+  const transaction = req.cookies.transaccion;
+  
+  if(typeof transaction !== 'undefined'){
+   console.log('transaction desde controllers',transaction);
+   res.json({transaction}); 
+  }else{
+  res.json({message:false});
+  }
+  
+  });
+app.get('/eliminarTransaction',(req,res)=>{
+  res.clearCookie('transaccion');
+  res.json({message:'transaccion eliminada'});
+ })
+app.get('/compras',verifyToken2,(req,res)=>{
+  baseDatos.MostrarCompras(req,res);
+  })
+//...............................................................................
+
+
+
+
+
+
+
 //-------------------------------------------------------
 // GET /editamos/:id
-app.get('/update/:id',(req, res) => {
+app.get('/update/:id',verifyToken2,(req, res) => {
 baseDatos.mostrarUpdate(req,res);
 
 });
@@ -100,7 +232,7 @@ app.post('/update/:id', (req, res) => {
 });
 //-------------------------------------------------------
 // GET /delete/:id
-app.get('/delete/:id', (req, res) => {
+app.get('/delete/:id',verifyToken2, (req, res) => {
  baseDatos.mostrarDelete(req,res);
 });
 //-------------------------------------------------------
@@ -109,11 +241,11 @@ app.post('/delete/:id', (req, res) => {
  baseDatos.deletee(req,res);
 });
 //------------------------------------------------------
-app.get('/categorias', (req, res) => {
+app.get('/categorias',verifyToken2, (req, res) => {
  baseDatos.getCategorias(req,res);
 });
 //-------------------------------------------------------
-app.get('/addCategorias', (req, res) => {
+app.get('/addCategorias',verifyToken2, (req, res) => {
  res.render('addcategoria.ejs');
 });
 //-------------------------------------------------------
@@ -121,7 +253,7 @@ app.post('/addcategorias', (req, res) => {
  baseDatos.postCategorias(req,res);
 });
 //-------------------------------------------------------
-app.get('/updateCategoria/:id',(req,res)=>{
+app.get('/updateCategoria/:id', verifyToken2,(req,res)=>{
  baseDatos.mostrarUpdateC(req,res);
 });
 //-------------------------------------------------------
@@ -129,11 +261,11 @@ app.post('/updateCategoria/:id',(req,res)=>{
 baseDatos.updateCateg(req,res);
 });
 //-------------------------------------------------------
-app.get('/eliminarCategoria/:id',(req,res)=>{
+app.get('/eliminarCategoria/:id', verifyToken2,(req,res)=>{
 baseDatos.deleteCategoriaGET(req,res);
 })
 //-------------------------------------------------------
-app.get('/javier',(req,res)=>{
+app.get('/javier', verifyToken,(req,res)=>{
   console.log('mostrando pagina la cliente!');
 baseDatos.ClientesGET(req,res);
 })
@@ -146,12 +278,12 @@ app.get('/clientico', (req, res) => {
  baseDatos.filtrar2(req,res);
 });
 //-------------------------------------------------------
-app.get('/detalles/:id',(req,res)=>{
+app.get('/detalles/:id',verifyToken,(req,res)=>{
 baseDatos.detalles(req,res);
 });
 //-------------------------------------------------------
 app.get('/ruta', (req, res) => {
-  const {nombre,codigo,precio,descripcion,calidad,cantidad,url} = req.query;
+  const {nombre,codigo,precio,descripcion,calidad,cantidad,url,id} = req.query;
 
   let datos = {
     nombre:nombre,
@@ -160,17 +292,29 @@ app.get('/ruta', (req, res) => {
     descripcion:descripcion,
     calidad:calidad,
     cantidad:cantidad,
-    url:url
+    url:url,
+    id:id
   }
 
-  console.log(datos,'aun funciona');
+  console.log(datos,'Valor de Busqueda--por fin');
   res.render('buscar.ejs',{result:datos});
 
 });
 //-------------------------------------------------------
-app.get('/detalles/:id',(req,res)=>{
+app.get('/detalles/:id',verifyToken,(req,res)=>{
 baseDatos.detalles(req,res);
 });
+//------------------------------------------------------
+app.get('/logout',(req, res) => {
+  res.clearCookie('token');
+  res.redirect('/');
+});
+//------------------------------------------------------
+app.get('/logout2',(req, res) => {
+  res.clearCookie('token2');
+  res.redirect('/');
+});
+//------------------------------------------------------
 //-------------------------------------------------------
 //rutas que no existen
 app.get('/*',(req,res)=>{

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="icon" type="image/x-icon" href="img/limpieza.png" />
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Crear cuenta</title>
+	<link rel="stylesheet" type="text/css" href="/css/login.css">
+</head>
+<body>
+ <h1 class="login">Iniciar sesion</h1>
+<div id="login">
+
+	<form class="login_form" action="iniciarEmail" method="post">
+
+			<label for="iniciar_email">email</label>
+			<input type="email" name="email" required>
+			<label for="iniciar_clave">Clave</label>
+			<	<input type="password" name="password" required>
+
+			<input type="submit" name="enviar" value="Iniciar" id='enviar'>	
+			<p>¿No tienes una cuenta? registrate aqui </p>
+			<a href='/user' id='casco'>crear cuenta</a>
+	</form>
+	<script type="text/javascript">
+	   fetch('/mensageDeRegistro')
+	   .then(res=> res.json())
+	   .then(respuesta=>{
+		   if(respuesta.mensaje == false){
+			   console.log('No se recibio nada de la ruta "mensajeDeRegistro" ');
+		   }else{
+				 console.log('--_--_--'+respuesta.mensaje+'--_--_--');
+				 Swal.fire('¡Se ha Registrado Exitosamente!')
+				 .then(()=>{
+					  fetch('/eliminarMensajeRegistro')
+					  .then(res=>res.json())
+					  .then(respuesta2=>{
+						  if(respuesta2.mensaje === false){
+							  console.log('mensaje inexistente');
+						  }			  
+					  })
+				 })
+		   }
+	   })
+   </script>
+
+</div>
+</body>
+</html>
+
+   

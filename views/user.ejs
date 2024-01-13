@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="icon" type="image/x-icon" href="img/limpieza.png" />
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Crear cuenta</title>
+	<link rel="stylesheet" type="text/css" href="/css/user.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+ <h1 class="login">Crear cuenta</h1>
+<div id="login">
+
+	<form class="login_form" action="/user" method="post">
+
+		<label>Nombre</label>
+		<input type="text" name="nombre" required>
+
+        <label>Apellido</label>
+        <input type="text" name="apellido" required>
+
+        <label>Cedula</label>
+        <input type="number" name="cedula" required>
+
+        <label>Correo</label>
+        <input type="email" name="email" required>
+
+        <label>Contraseña</label>
+        <input type="password" name="contrasena" required>
+
+        <input type="submit" value='Registrar' id="registro">
+       
+        <div class="g-recaptcha" data-sitekey="6LcP7EkpAAAAADhHkaAuLH8jC4G3Mp04NgwBgacw"></div>
+<a href='/iniciarEmail' id="registro">iniciar sesion</a>
+
+	</form>
+	
+      
+</div>
+</body>
+</html>
