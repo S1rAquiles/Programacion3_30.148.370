@@ -150,15 +150,11 @@ app.post('/iniciarEmail',(req,res)=>{
 app.get('/user',(req,res)=>{
   res.render('user.ejs');
 });
-app.post('/user',recaptcha.middleware.verify,(req,res)=>{
+app.post('/user',(req,res)=>{
   
-if(!req.recaptcha.error){
-    // El reCAPTCHA se ha verificado correctamente
+
     baseDatos.aggUser(req,res);
-  } else{
-    // El reCAPTCHA no se ha verificado correctamente
-    res.send('Debes validar el Recaptcha');
-  } 
+
 })
 app.get('/mensageDeRegistro',(req,res)=>{
   const registro = req.cookies.registro;
